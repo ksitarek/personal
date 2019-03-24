@@ -5,12 +5,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WhoamiComponent } from './whoami/whoami.component';
 import { NotFoundComponent } from './notfound/notfound.component';
+import { ProgrammingComponent } from './programming/programming.component';
+import { DevopsComponent } from './devops/devops.component';
+import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WhoamiComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ProgrammingComponent,
+    DevopsComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
