@@ -1,12 +1,19 @@
 #!/usr/bin/env bash
 
-if [ "$TRAVIS_BRANCH" = "master" ];
-then
-    echo "Deploy to production"
-    find dist -type f -exec curl --ftp-create-dirs -T {} -u $FTP_USER:$FTP_PASSWORD ftp://$FTP_HOST/{} \\;
-elif [ "$TRAVIS_BRANCH" = "develop" ];
-then
-    echo "Deploy to develop"
-    find dist -type f -exec curl --ftp-create-dirs -T {} -u $FTP_DEVELOP_USER:$FTP_DEVELOP_PASSWORD ftp://$FTP_HOST/{} \\;
+TRAVIS_BRANCH=develop
+
+if [ "$TRAVIS_BRANCH" = "master" ]; then 
+    _FTP_USER=$FTP_USER
+    _FTP_PASSWORD=$FTP_PASSWORD
+
+    echo "Deploying to prod"
 fi
-echo "Deploy succeeded"
+    
+if [ "$TRAVIS_BRANCH" = "develop" ]; then 
+    _FTP_USER=$FTP_DEVELOP_USER
+    _FTP_PASSWORD=$FTP_DEVELOP_PASSWORD
+    
+    echo "Deploying to develop"
+fi
+    
+find dist -type f -exec curl --ftp-create-dirs -T {} -u $_FTP_USER:$_FTP_PASSWORD ftp://$FTP_HOST/{} \;
