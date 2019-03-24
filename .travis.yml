@@ -12,3 +12,7 @@ before_script:
 script:
 - ng lint
 - ng build --prod --base-href https://krystiansitarek.pl/
+
+
+after_success:
+  "find dist -type f -exec curl --ftp-create-dirs -T {} -u $FTP_USER:$FTP_PASSWORD ftp://$FTP_HOST/{} \\;"
