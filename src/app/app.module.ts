@@ -4,11 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WhoamiComponent } from './whoami/whoami.component';
+import { NotFoundComponent } from './notfound/notfound.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    WhoamiComponent
+    WhoamiComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
