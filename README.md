@@ -1,27 +1,9 @@
-# PersonalPage
+![](https://api.travis-ci.com/ksitarek/personal.svg?branch=master)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.4.
+# Krystian Sitarek personal page
+Although this might look as a complete overkill, this repository simply shows how much I love to code & experiment with code.
 
-## Development server
+This repository shows full code that is being used as a frontend layer for my [personal website](http://krystiansitarek.pl/).
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+This simple Angular app is being built via [Travis CI](https://travis-ci.com/ksitarek/personal/builds).
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
