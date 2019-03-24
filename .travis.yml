@@ -5,14 +5,24 @@ dist: trusty
 sudo: required
 branches:
   only:
-  - master
+  #- master
   - develop
 before_script:
   - npm install -g @angular/cli
 script:
 - ng lint
-- ng build --prod --base-href https://krystiansitarek.pl/
+- ng build --prod --base-href krystiansitarek.pl/
 
 
 after_success:
-  "sh deploy.sh"
+  - 'if [ "$TRAVIS_BRANCH" = "master" ]; then 
+        _FTP_USER=$FTP_USER
+        _FTP_PASSWORD=$FTP_PASSWORD
+     fi'
+  - 'if [ "$TRAVIS_BRANCH" = "develop" ]; then 
+        _FTP_USER=$FTP_DEVELOP_USER
+        _FTP_PASSWORD=$FTP_DEVELOP_PASSWORD
+    fi'
+
+
+  - "find dist -type f -exec curl --ftp-create-dirs -T {} -u $_FTP_USER:$_FTP_PASSWORD ftp://$FTP_HOST/{} \\;"
