@@ -5,7 +5,7 @@ dist: trusty
 sudo: required
 branches:
   only:
-  #- master
+  - master
   - develop
 before_script:
   - npm install -g @angular/cli
@@ -15,4 +15,4 @@ script:
 
 
 after_success:
-  "find dist -type f -exec curl --ftp-create-dirs -T {} -u $FTP_USER:$FTP_PASSWORD ftp://$FTP_HOST/{} \\;"
+  "sh deploy.sh"
