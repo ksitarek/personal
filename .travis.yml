@@ -11,7 +11,7 @@ before_script:
   - npm install -g @angular/cli
 script:
 - ng lint
-- ng build --prod --base-href krystiansitarek.pl/
+- ng build --prod
 
 
 after_success:
