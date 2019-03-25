@@ -9,7 +9,9 @@ export class MailServiceRequest {
         this.senderName = senderName;
         this.senderEmail = senderEmail;
         this.mailSubject = mailSubject;
-        this.mailMessage = mailMessage;
         this.recaptcha = recaptcha;
+
+        // replace newlines into <br>
+        this.mailMessage = mailMessage.replace(/(?:\r\n|\r|\n)/g, '<br />');
     }
 }
