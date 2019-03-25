@@ -14,6 +14,8 @@ import { RecaptchaFormsModule } from 'ng-recaptcha/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +32,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     AngularFontAwesomeModule,
     RecaptchaModule,
     RecaptchaFormsModule,
+    HttpClientModule
   ],
   providers: [{
     provide: RECAPTCHA_SETTINGS,

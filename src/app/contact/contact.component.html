@@ -1,75 +1,88 @@
-<h1 class="text-center">Let's get in touch!</h1>
+<div *ngIf="!sent">
+  <h1 class="text-center">Let's get in touch!</h1>
 
-<div class="row">
-  <div class="col-3"></div>
-  <div class="col-6 pt-5">
-    <form [formGroup]="contactForm" (ngSubmit)="recaptchaComponent.execute()">
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-6 pt-5">
+      <div class="alert alert-danger" *ngIf="errored">Oops. Something went wrong :(</div>
 
-      <!-- Sender name -->
-      <div class="form-group">
-        <label for="sender-name">Name</label>
-        <input type="text" class="form-control" id="sender-name" placeholder="Tell me your name"
-          formControlName="senderName">
+      <form [formGroup]="contactForm" (ngSubmit)="ngSubmit(recaptchaComponent)">
 
-        <small class="text-success" *ngIf="senderName.valid">Nice to meet you, {{senderName.value}}!</small>
-        <div *ngIf="senderName.invalid && (senderName.dirty || senderName.touched)">
-          <small class="text-danger" *ngIf="senderName.errors.required">
-            I really would like to know who is messaging me :)
-          </small>
+        <!-- Sender name -->
+        <div class="form-group">
+          <label for="sender-name">Name</label>
+          <input type="text" class="form-control" id="sender-name" placeholder="Tell me your name"
+            formControlName="senderName">
+
+          <small class="text-success" *ngIf="senderName.valid">Nice to meet you, {{senderName.value}}!</small>
+          <div *ngIf="senderName.invalid && (senderName.dirty || senderName.touched)">
+            <small class="text-danger" *ngIf="senderName.errors.required">
+              I really would like to know who is messaging me :)
+            </small>
+          </div>
         </div>
-      </div>
 
-      <!-- Sender email -->
-      <div class="form-group">
-        <label for="sender-mail">Your e-mail address</label>
-        <input type="email" class="form-control" id="sender-mail" placeholder="Let me answer"
-          formControlName="senderEmail">
+        <!-- Sender email -->
+        <div class="form-group">
+          <label for="sender-mail">Your e-mail address</label>
+          <input type="email" class="form-control" id="sender-mail" placeholder="Let me answer"
+            formControlName="senderEmail">
 
-        <small class="text-success" *ngIf="senderEmail.valid">I will reply ASAP!</small>
-        <div *ngIf="senderEmail.invalid && (senderEmail.dirty || senderEmail.touched)">
-          <small class="text-danger" *ngIf="senderEmail.errors.required">
-            Please, let me reply to your e-mail.
-          </small>
-          <small class="text-danger" *ngIf="senderEmail.errors.email">
-            It seems that there is something wrong with your e-mail address.
-          </small>
+          <small class="text-success" *ngIf="senderEmail.valid">I will reply ASAP!</small>
+          <div *ngIf="senderEmail.invalid && (senderEmail.dirty || senderEmail.touched)">
+            <small class="text-danger" *ngIf="senderEmail.errors.required">
+              Please, let me reply to your e-mail.
+            </small>
+            <small class="text-danger" *ngIf="senderEmail.errors.email">
+              It seems that there is something wrong with your e-mail address.
+            </small>
+          </div>
         </div>
-      </div>
 
-      <!-- Subject field-->
-      <div class="form-group">
-        <label for="mail-subject">Subject</label>
-        <input type="text" class="form-control" id="mail-subject" placeholder="What you like to talk about?"
-          formControlName="mailSubject">
+        <!-- Subject field-->
+        <div class="form-group">
+          <label for="mail-subject">Subject</label>
+          <input type="text" class="form-control" id="mail-subject" placeholder="What you like to talk about?"
+            formControlName="mailSubject">
 
-        <div *ngIf="mailSubject.invalid && (mailSubject.dirty || mailSubject.touched)">
-          <small class="text-danger" *ngIf="mailSubject.errors.required">
-            There must be some catch phrase to summarize your thoughts!
-          </small>
+          <div *ngIf="mailSubject.invalid && (mailSubject.dirty || mailSubject.touched)">
+            <small class="text-danger" *ngIf="mailSubject.errors.required">
+              There must be some catch phrase to summarize your thoughts!
+            </small>
+          </div>
         </div>
-      </div>
 
-      <!-- Message field -->
-      <div class="form-group">
-        <label for="mail-message">Message</label>
-        <textarea type="text" class="form-control" id="mail-message"
-          placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit."
-          formControlName="mailMessage"></textarea>
+        <!-- Message field -->
+        <div class="form-group">
+          <label for="mail-message">Message</label>
+          <textarea type="text" class="form-control" id="mail-message"
+            placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit."
+            formControlName="mailMessage"></textarea>
 
-        <div *ngIf="mailMessage.invalid && (mailMessage.dirty || mailMessage.touched)">
-          <small class="text-danger" *ngIf="mailMessage.errors.required">
-            That does not seem like a lot of a message. ;)
-          </small>
+          <div *ngIf="mailMessage.invalid && (mailMessage.dirty || mailMessage.touched)">
+            <small class="text-danger" *ngIf="mailMessage.errors.required">
+              That does not seem like a lot of a message. ;)
+            </small>
+          </div>
         </div>
-      </div>
 
-      <re-captcha size="invisible" #recaptchaComponent (resolved)="captchaResolved($event)" formControlName="recaptcha">
-      </re-captcha>
+        <re-captcha size="invisible" #recaptchaComponent (resolved)="captchaResolved($event)"
+          formControlName="recaptcha">
+        </re-captcha>
 
-      <button class="btn btn-lg btn-primary pull-right" type="button" [hidden]="contactForm.invalid"
-        [disabled]="contactForm.invalid" (click)="recaptchaComponent.execute()">
-        Send <fa name="send"></fa>
-      </button>
-    </form>
+
+        <button class="btn btn-lg btn-primary pull-right" type="submit" [disabled]="contactForm.invalid || sending">
+          <span *ngIf="!sending">Send <fa name="send"></fa></span>
+          <span *ngIf="sending">
+            <fa name="spinner" animation="spin"></fa> Sending...
+          </span>
+        </button>
+      </form>
+    </div>
+
   </div>
+</div>
+<div *ngIf="sent" class="text-center">
+  <h1>Thanks for reaching out to me!</h1>
+  <p> I will do everything I can to reply to you ASAP, {{ sentTo }}.</p>
 </div>
