@@ -12,7 +12,10 @@ export class MailService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+    // prepare remote to handle sendMail request
+    this.http.head(environment.mailServiceEndpoint).toPromise();
+  }
 
   sendMail(data: MailServiceRequest): Promise<MailServiceResponse> {
     return this.http.post<MailServiceResponse>(environment.mailServiceEndpoint, data)

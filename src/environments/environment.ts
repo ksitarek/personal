@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
 
-  mailServiceEndpoint: 'https://ksitarek-personal-mailing-app.azurewebsites.net/api/mail'
+  mailServiceEndpoint: 'https://ksitarek-personal-mailing-app.azurewebsites.net/api/mail',
 };
 
 /*
