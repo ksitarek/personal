@@ -16,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 import { HttpClientModule } from '@angular/common/http';
+import { GtagModule } from 'angular-gtag';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { HttpClientModule } from '@angular/common/http';
     AngularFontAwesomeModule,
     RecaptchaModule,
     RecaptchaFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    GtagModule.forRoot({ trackingId: 'UA-138209527-1', trackPageviews: true })
   ],
   providers: [{
     provide: RECAPTCHA_SETTINGS,
